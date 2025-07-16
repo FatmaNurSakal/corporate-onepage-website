@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Dijital360 | Dijital Pazarlama Ajansı</title>
+    <link rel="icon" href="https://example.com/favicon.ico" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        body {
+            scroll-behavior: smooth;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* Navbar Styling */
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: #007bff !important; /* Brand color */
+        }
+        .navbar-nav .nav-link {
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        .navbar-nav .nav-link:hover {
+            color: #007bff !important;
+        }
+
+        /* Hero Section */
+        #home {
+            position: relative;
+            height: 90vh; /* Full viewport height */
+            background: url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            overflow: hidden;
+        }
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.6); /* Dark overlay */
+            z-index: 1;
+        }
+        #home .container {
+            position: relative;
+            z-index: 2;
+        }
+        #home h1 {
+            font-size: 3.8rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            animation: fadeIn 1.5s ease-out;
+        }
+        #home p.lead {
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            animation: fadeIn 1.8s ease-out;
+        }
+        #home .btn {
+            padding: 12px 30px;
+            font-size: 1.1rem;
+            border-radius: 50px;
+            animation: zoomIn 1.5s ease-out;
+            transition: all 0.3s ease;
+        }
+        #home .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        /* General Section Styling */
+        section {
+            padding: 80px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        section h2 {
+            font-weight: bold;
+            color: #2c2c2c;
+            margin-bottom: 4rem;
+            font-size: 2.5rem;
+            position: relative;
+        }
+        section h2::after {
+            content: '';
+            position: absolute;
+            left: 50%;
+            bottom: -15px;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background-color: #007bff;
+            border-radius: 2px;
+        }
+
+        /* Services Section */
+        #services .card {
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+        #services .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+        }
+        #services .card-body {
+            padding: 30px;
+        }
+        #services .card-img-top {
+            height: 200px;
+            object-fit: cover;
+        }
+        #services .card-title {
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+        #services .card-text {
+            color: #555;
+        }
+        #services .icon-wrapper {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #007bff;
+        }
+
+        /* About Section */
+        #about img {
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        #about p {
+            line-height: 1.8;
+            color: #555;
+        }
+        #about h3 {
+            font-weight: 600;
+            color: #007bff;
+            margin-top: 30px;
+            margin-bottom: 20px;
+        }
+        #about ul {
+            list-style: none;
+            padding: 0;
+        }
+        #about ul li {
+            margin-bottom: 10px;
+            color: #555;
+        }
+        #about ul li i {
+            color: #007bff;
+            margin-right: 10px;
+        }
+
+        /* Call to Action Section */
+        #cta-section {
+            background: linear-gradient(rgba(0, 123, 255, 0.8), rgba(0, 123, 255, 0.8)), url('https://images.unsplash.com/photo-1542831371-29b0f74f9713?auto=format&fit=crop&w=1470&q=80') no-repeat center center/cover;
+            color: white;
+            padding: 100px 0;
+            text-align: center;
+        }
+        #cta-section h2 {
+            color: white;
+            font-size: 3rem;
+        }
+        #cta-section h2::after {
+            background-color: white;
+        }
+        #cta-section p {
+            font-size: 1.4rem;
+            margin-bottom: 30px;
+        }
+
+        /* Portfolio Section */
+        #portfolio .carousel-item img {
+            height: 400px; /* Fixed height for consistency */
+            object-fit: cover;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        #portfolio .carousel-caption {
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 5px;
+            padding: 10px 15px;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            max-width: 500px;
+            opacity: 0; /* Hidden by default */
+            transition: opacity 0.5s ease;
+        }
+        #portfolio .carousel-item.active .carousel-caption {
+            opacity: 1; /* Visible when active */
+        }
+        #portfolio .carousel-control-prev, #portfolio .carousel-control-next {
+            width: 5%;
+        }
+
+        /* Testimonials Section */
+        #testimonials .carousel-item {
+            padding: 20px;
+        }
+        #testimonials .testimonial-item {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            text-align: center;
+        }
+        #testimonials .testimonial-item img {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 15px;
+            border: 3px solid #007bff;
+        }
+        #testimonials .testimonial-item p {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        #testimonials .testimonial-item h5 {
+            font-weight: 600;
+            color: #2c2c2c;
+            margin-bottom: 5px;
+        }
+        #testimonials .testimonial-item span {
+            font-size: 0.9rem;
+            color: #777;
+        }
+        #testimonials .carousel-indicators [data-bs-target] {
+            background-color: #007bff;
+        }
+        #testimonials .carousel-control-prev-icon,
+        #testimonials .carousel-control-next-icon {
+            filter: invert(1);
+        }
+
+        /* Team Section */
+        #team .team-member {
+            text-align: center;
+            background: #fff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+        }
+        #team .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+        #team .team-member img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 20px;
+            border: 4px solid #007bff;
+        }
+        #team .team-member h4 {
+            font-weight: 600;
+            color: #2c2c2c;
+            margin-bottom: 5px;
+        }
+        #team .team-member p.text-muted {
+            font-size: 0.95rem;
+        }
+        #team .team-member .social-links a {
+            color: #007bff;
+            font-size: 1.2rem;
+            margin: 0 8px;
+            transition: color 0.3s ease;
+        }
+        #team .team-member .social-links a:hover {
+            color: #0056b3;
+        }
+
+        /* Contact Section */
+        #contact .form-control {
+            border-radius: 0.5rem;
+            padding: 12px;
+        }
+        #contact .form-label {
+            font-weight: 500;
+        }
+        #contact .btn-primary {
+            padding: 12px 40px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+        #contact .btn-primary:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 15px rgba(0, 123, 255, 0.2);
+        }
+        .contact-info p {
+            margin-bottom: 1rem;
+            color: #555;
+            font-size: 1.1rem;
+        }
+        .contact-info i {
+            color: #007bff;
+            margin-right: 10px;
+        }
+        .map-container {
+            overflow: hidden;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            position: relative;
+            height: 0;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+        .map-container iframe {
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 100%;
+            position: absolute;
+            border: 0;
+            border-radius: 10px; /* Match container border-radius */
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            background-color: #343a40; /* Dark background for footer */
+            color: white;
+        }
+        footer .social-icons a {
+            color: white;
+            font-size: 1.8rem;
+            margin: 0 12px;
+            transition: color 0.3s ease;
+        }
+        footer .social-icons a:hover {
+            color: #007bff;
+        }
+        footer p {
+            margin-top: 20px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Back to Top Button */
+        #back-to-top {
+            display: none; /* Hidden by default */
+            position: fixed; /* Fixed position */
+            bottom: 30px; /* Place at bottom */
+            right: 30px; /* Place at right */
+            z-index: 1000; /* High z-index to be on top */
+            font-size: 24px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            line-height: 50px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 123, 255, 0.3);
+            text-decoration: none; /* Remove underline */
+        }
+        #back-to-top:hover {
+            background-color: #0056b3;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 123, 255, 0.4);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+        /* Typing effect for hero heading */
+        #typing-effect {
+            overflow: hidden; /* Ensures the content is not visible until the typing animation */
+            border-right: .15em solid orange; /* The caret */
+            white-space: nowrap; /* Keeps the content on a single line */
+            margin: 0 auto; /* Centers the text */
+            letter-spacing: .05em; /* Adjust as needed */
+            animation: typing 3.5s steps(40, end), blink-caret .75s step-end infinite;
+        }
+
+        /* Typing animation */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        /* Blinking caret animation */
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
+        }
+
+        /* Animate on Scroll Classes */
+        .animate-on-scroll {
+            opacity: 0;
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+            transform: translateY(20px);
+        }
+        .animate-on-scroll.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .fade-in-up.active {
+            animation: slideInUp 1s ease-out forwards;
+        }
+        .fade-in-left.active {
+            animation: fadeInLeft 1s ease-out forwards;
+        }
+        .fade-in-right.active {
+            animation: fadeInRight 1s ease-out forwards;
+        }
+
+        @keyframes fadeInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Delay for animations */
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            #home h1 {
+                font-size: 2.5rem;
+            }
+            #home p.lead {
+                font-size: 1.2rem;
+            }
+            section h2 {
+                font-size: 2rem;
+            }
+            #cta-section h2 {
+                font-size: 2.2rem;
+            }
+            #portfolio .carousel-item img {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="70">
+
+    <nav id="navbar" class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top shadow-sm">
+        <div class="container">
+            <a class="navbar-brand" href="#">Dijital360</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu" aria-controls="navMenu" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navMenu">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#home">Anasayfa</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Hizmetler</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#portfolio">Portföy</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">Hakkımızda</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#team">Ekibimiz</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#testimonials">Referanslar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">İletişim</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section id="home">
+        <div class="container">
+            <h1 class="display-4"><span id="typing-effect">Dijital Çözümlerde Uzmanız</span></h1>
+            <p class="lead">Markanızı dijitalde büyütmek için buradayız.</p>
+            <a href="#services" class="btn btn-light mt-3">Daha Fazlasını Keşfedin <i class="bi bi-arrow-down-circle ms-2"></i></a>
+        </div>
+    </section>
+
+    <section id="services" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Hizmetlerimiz</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col animate-on-scroll fade-in-up">
+                    <div class="card h-100 text-center">
+                        <img src="https://plus.unsplash.com/premium_photo-1685283298465-e52e933a3312?q=80&w=1025&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Dijital Pazarlama">
+                        <div class="card-body">
+                            <div class="icon-wrapper"><i class="bi bi-bar-chart-fill"></i></div>
+                            <h5 class="card-title mt-3">Dijital Pazarlama</h5>
+                            <p class="card-text">SEO, SEM, sosyal medya yönetimi ve içerik stratejileriyle hedef kitlenize ulaşın.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col animate-on-scroll fade-in-up delay-1">
+                    <div class="card h-100 text-center">
+                        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Grafik Tasarım">
+                        <div class="card-body">
+                            <div class="icon-wrapper"><i class="bi bi-palette-fill"></i></div>
+                            <h5 class="card-title mt-3">Grafik Tasarım</h5>
+                            <p class="card-text">Logo, kurumsal kimlik, web arayüzü ve tüm görsel materyal tasarımları.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col animate-on-scroll fade-in-up delay-2">
+                    <div class="card h-100 text-center">
+                        <img src="https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=1036&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="card-img-top" alt="Web Geliştirme">
+                        <div class="card-body">
+                            <div class="icon-wrapper"><i class="bi bi-code-slash"></i></div>
+                            <h5 class="card-title mt-3">Web Geliştirme</h5>
+                            <p class="card-text">Modern, mobil uyumlu, kullanıcı dostu ve hızlı web siteleri oluşturuyoruz.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="portfolio" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Öne Çıkan Projelerimiz</h2>
+            <div id="portfolioCarousel" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#portfolioCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="https://images.unsplash.com/photo-1572177812156-58036aae439c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="Proje 1">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Kurumsal Web Sitesi Yenileme</h5>
+                            <p>Modern tasarım ve optimize edilmiş performans ile marka imajını güçlendirdik.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="Proje 2">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>Sosyal Medya Kampanyası</h5>
+                            <p>Hedef kitleye yönelik etkili kampanyalarla marka bilinirliğini artırdık.</p>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <img src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="d-block w-100" alt="Proje 3">
+                        <div class="carousel-caption d-none d-md-block">
+                            <h5>SEO ve İçerik Optimizasyonu</h5>
+                            <p>Arama motoru sıralamalarında üst sıralara çıkarak organik trafiği artırdık.</p>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#portfolioCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="bg-light py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">Hakkımızda</h2>
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0 animate-on-scroll fade-in-left">
+                    <img src="https://images.unsplash.com/photo-1528153876264-9f3c0878abd0?q=80&w=1176&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" class="img-fluid" alt="Hakkımızda">
+                </div>
+                <div class="col-md-6 animate-on-scroll fade-in-right">
+                    <p class="lead">
+                        Dijital360, 2015 yılından bu yana küçük ve orta ölçekli işletmelere dijital çözümler sunmaktadır. Müşteri odaklı yaklaşımımızla kalıcı ve ölçülebilir başarılar üretiriz.
+                    </p>
+                    <h3>Vizyonumuz ve Misyonumuz</h3>
+                    <p>
+                        **Vizyonumuz:** Dijital dünyada markaların potansiyellerini en üst düzeye çıkararak sektör lideri konumuna gelmelerini sağlamak.
+                    </p>
+                    <p>
+                        **Misyonumuz:** Yenilikçi stratejiler, yaratıcı çözümler ve veri odaklı yaklaşımlarla müşterilerimize değer katmak, dijital varlıklarını güçlendirmek ve sürdürülebilir büyümeyi desteklemek.
+                    </p>
+                    <ul>
+                        <li><i class="bi bi-check-circle-fill"></i> Stratejik Dijital Danışmanlık</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Performans Odaklı Çalışma</li>
+                        <li><i class="bi bi-check-circle-fill"></i> Şeffaf Raporlama</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="cta-section" class="animate-on-scroll fade-in">
+        <div class="container">
+            <h2 class="mb-3">Dijital Varlığınızı Bizimle Güçlendirin!</h2>
+            <p>Ücretsiz danışmanlık almak ve markanız için özel çözümler keşfetmek ister misiniz?</p>
+            <a href="#contact" class="btn btn-light btn-lg">Hemen İletişime Geçin <i class="bi bi-envelope-fill ms-2"></i></a>
+        </div>
+    </section>
+
+    <section id="team" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="text-center mb-4">Ekibimiz</h2>
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <div class="col animate-on-scroll fade-in-up">
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ahmet Yılmaz">
+                        <h4>Ahmet Yılmaz</h4>
+                        <p class="text-muted">CEO & Dijital Pazarlama Direktörü</p>
+                        <div class="social-links">
+                            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col animate-on-scroll fade-in-up delay-1">
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Ayşe Demir">
+                        <h4>Ayşe Demir</h4>
+                        <p class="text-muted">Kreatif Direktör</p>
+                        <div class="social-links">
+                            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col animate-on-scroll fade-in-up delay-2">
+                    <div class="team-member">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Can Kaya">
+                        <h4>Can Kaya</h4>
+                        <p class="text-muted">Web Geliştirme Lideri</p>
+                        <div class="social-links">
+                            <a href="#" target="_blank"><i class="fab fa-linkedin"></i></a>
+                            <a href="#" target="_blank"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-4">Müşteri Görüşleri</h2>
+            <div id="testimonialCarousel" class="carousel slide" data-bs-ride="carousel">
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <div class="testimonial-item animate-on-scroll fade-in-up">
+                            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Müşteri 1">
+                            <p>"Dijital360 ile çalışmak harika bir deneyimdi. Web sitemiz beklentilerimizin çok ötesinde oldu ve dijital pazarlama kampanyaları sayesinde müşteri trafiğimiz inanılmaz arttı!"</p>
+                            <h5>Elif Can</h5>
+                            <span>ABC Ticaret CEO'su</span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="testimonial-item animate-on-scroll fade-in-up">
+                            <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Müşteri 2">
+                            <p>"Sosyal medya yönetiminde gerçekten fark yarattılar. Markamızın hedef kitlesiyle etkileşimini büyük ölçüde artırdılar ve harika içerikler ürettiler."</p>
+                            <h5>Murat Güneş</h5>
+                            <span>Moda Butik Sahibi</span>
+                        </div>
+                    </div>
+                    <div class="carousel-item">
+                        <div class="testimonial-item animate-on-scroll fade-in-up">
+                            <img src="https://images.unsplash.com/photo-1688888745596-da40843a8d45?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Müşteri 3">
+                            <p>"SEO optimizasyonları sayesinde arama motoru sıralamalarımızda gözle görülür bir artış yaşadık. Dijital360 ekibine teşekkürler!"</p>
+                            <h5>Zeynep Akın</h5>
+                            <span>Eğitim Kurumları Yöneticisi</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#testimonialCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="py-5">
+        <div class="container">
+            <h2 class="text-center mb-4">İletişim</h2>
+            <p class="text-center lead mb-5">Dijital dönüşüm yolculuğunuzda size nasıl yardımcı olabiliriz? Bizimle iletişime geçin!</p>
+            <div class="row g-4">
+                <div class="col-md-6 animate-on-scroll fade-in-left">
+                    <h4 class="mb-4">Bize Yazın</h4>
+                    <form class="p-4 shadow-sm rounded bg-light">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Adınız Soyadınız</label>
+                            <input type="text" class="form-control" id="name" placeholder="Adınızı ve soyadınızı yazınız" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="email" class="form-label">E-posta Adresiniz</label>
+                            <input type="email" class="form-control" id="email" placeholder="ornek@mail.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Konu</label>
+                            <input type="text" class="form-control" id="subject" placeholder="Mesajınızın konusu" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message" class="form-label">Mesajınız</label>
+                            <textarea class="form-control" id="message" rows="5" placeholder="Mesajınızı yazınız..." required></textarea>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary btn-lg">Mesajı Gönder <i class="bi bi-send-fill ms-2"></i></button>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-md-6 animate-on-scroll fade-in-right">
+                    <h4 class="mb-4">Bizi Ziyaret Edin</h4>
+                    <div class="contact-info mb-4">
+                        <p><i class="fas fa-map-marker-alt me-2"></i> Örnek Mah. Dijital Cad. No:123, Kadıköy, İstanbul, Türkiye</p>
+                        <p><i class="fas fa-phone me-2"></i> +90 212 123 45 67</p>
+                        <p><i class="fas fa-envelope me-2"></i> info@dijital360.com</p>
+                        <p><i class="fas fa-clock me-2"></i> Çalışma Saatleri: Pzt - Cuma: 09:00 - 18:00</p>
+                    </div>
+                    <div class="map-container">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1504.600980648839!2d29.02298715849887!3d41.02619479632882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x14cab79ce9f18a59%3A0x67a36c53e0f4a210!2sKad%C4%B1k%C3%B6y%2F%C4%B0stanbul!5e0!3m2!1str!2str!4v1717329532585!5m2!1str!2str" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white text-center py-4">
+        <div class="container">
+            <div class="social-icons mb-3">
+                <a href="#" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
+                <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+            </div>
+            <p>&copy; 2024 Dijital360. Tüm Hakları Saklıdır.</p>
+        </div>
+    </footer>
+
+    <a href="#" id="back-to-top" class="shadow-lg"><i class="bi bi-arrow-up"></i></a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Typing effect for home section
+            const typingEffectElement = document.getElementById('typing-effect');
+            if (typingEffectElement) {
+                const text = typingEffectElement.textContent;
+                typingEffectElement.textContent = ''; // Clear text initially
+                let i = 0;
+                function typeWriter() {
+                    if (i < text.length) {
+                        typingEffectElement.textContent += text.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 75); // Typing speed
+                    }
+                }
+                typeWriter();
+            }
+
+            // Animate on Scroll
+            const animateElements = document.querySelectorAll('.animate-on-scroll');
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        // Optional: Stop observing once animated
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+
+            animateElements.forEach(element => {
+                observer.observe(element);
+            });
+
+            // Back to Top Button
+            const backToTopButton = document.getElementById('back-to-top');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) { // Show button after scrolling 300px
+                    backToTopButton.style.display = 'block';
+                } else {
+                    backToTopButton.style.display = 'none';
+                }
+            });
+
+            backToTopButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
